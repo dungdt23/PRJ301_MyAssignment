@@ -3,10 +3,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Jun 5, 2022, 10:55:04 PM
+    Created on : Jun 7, 2022, 6:38:36 PM
     Author     : Admin
 */
-form {
-    text-align: center
+header {
+    text-align: center       
 }
-
+header img {
+    width : 50%
+}
+form {
+    text-align: center;
+}

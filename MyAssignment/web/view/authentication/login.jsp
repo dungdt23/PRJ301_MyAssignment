@@ -9,10 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="view/authentication/authen.css" rel="stylesheet" type="text/css" />
-        <title>My Assignment</title>
+        <link href="view/authentication/login.css" rel="stylesheet" type="text/css" />
+        <title>Login</title>
     </head>
     <body>
+        <header>
+            <img src="img/img1.png"/>
+        </header>
         <form action="authentication" method="POST">
             Campus: <select name="campus">
                 <option>FU-HL</option>

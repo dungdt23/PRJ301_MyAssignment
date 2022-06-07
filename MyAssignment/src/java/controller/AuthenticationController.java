@@ -4,11 +4,14 @@
  */
 package controller;
 
+import dal.TimeSlotDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.TimeSlot;
 
 /**
  *
@@ -56,7 +59,10 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.getWriter().print("Hello");
+        TimeSlotDBContext timeSlotDB = new TimeSlotDBContext();
+        ArrayList<TimeSlot> slots = timeSlotDB.list();
+        request.setAttribute("slots", slots);
+        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
     }
 
 }
