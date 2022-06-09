@@ -58,32 +58,46 @@
                             ${s.slotID}
                         </td>
                         <td>
+                            <a href="attendance">
                             PRJ301-View Materials
-                            at DE-C201                           
+                            at DE-C201       
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             MAS291-View Materials
                             at DE-C201
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             MAS291-View Materials
                             at DE-C201
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             MAS291-View Materials
                             at DE-C201
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             PRJ301-View Materials
                             at DE-C201
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             PRJ301-View Materials
                             at DE-C201
+                            </a>
                         </td>
                         <td>
+                            <a href="attendance">
                             PRJ301-View Materials
                             at DE-C201
+                            </a>
                         </td>
                     </tr>  
                 </c:forEach>
