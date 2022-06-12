@@ -17,6 +17,11 @@ public class Session {
     private TimeSlot timeslot;
     private ArrayList<Attendance> attendanceList;
 
+    @Override
+    public String toString() {
+        return "Session{" + "sessionID=" + sessionID + ", group=" + group + ", room=" + room + ", timeslot=" + timeslot + ", attendanceList=" + attendanceList + '}';
+    }
+
     public Session() {
     }
 

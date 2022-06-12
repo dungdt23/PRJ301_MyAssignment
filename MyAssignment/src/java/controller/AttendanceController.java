@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Student;
 
 /**
  *
@@ -57,6 +59,10 @@ public class AttendanceController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        String sessionID = request.getParameter("sessionID");
+        StudentDBContext dbStudent = new StudentDBContext();
+        ArrayList<Student> students = dbStudent.list(sessionID);
+        request.setAttribute("students", students);
         request.getRequestDispatcher("view/search/studentlist.jsp").forward(request, response);
     }
 
@@ -72,6 +78,7 @@ public class AttendanceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        response.getWriter().print("SAVED!!!");
     }
 
     /**

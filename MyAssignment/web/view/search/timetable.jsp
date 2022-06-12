@@ -16,9 +16,9 @@
     <body>
         <form action="authentication" method="POST">
             Campus: <select name="campus">
-                <option>FU-HL</option>
+                <option>${requestScope.lecture.campus}</option>
             </select> <Br/>
-            Lecture: <input type="text" name="lecture"/>
+            Lecture: <input type="text" name="lecture" value="${requestScope.lecture.lectureName}" readonly/>
             <input type="submit" value="View"/>
             <table border="2"> 
                 <tr style="background-color: #81DAF5">
@@ -51,9 +51,8 @@
                     <td style="background-color: #81DAF5">10/06</td>
                     <td style="background-color: #81DAF5">11/06</td>
                     <td style="background-color: #81DAF5">12/06</td>
-                </tr>  
-                <c:forEach var="s" items="${requestScope.slots}">
-                    <tr>
+                </tr>                 
+<!--                    <tr>
                         <td>
                             ${s.slotID}
                         </td>
@@ -99,7 +98,57 @@
                             at DE-C201
                             </a>
                         </td>
-                    </tr>  
+                    </tr>  -->
+                <c:forEach var="s" items="${requestScope.slots}">
+                    <tr>
+                        <td>
+                            ${s.slotID}
+                        </td>
+                        <td>
+                            <a href="attendance?sessionID=${requestScope.session.sessionID}">
+                                ${requestScope.session.sessionID}
+                                ${requestScope.session.room.getRoomID()}
+                                ${requestScope.session.group.getGroupID()}
+                                ${requestScope.session.timeslot.getSlotID()}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            MAS291-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            MAS291-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            MAS291-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            PRJ301-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            PRJ301-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                        <td>
+                            <a href="attendance">
+                            PRJ301-View Materials
+                            at DE-C201
+                            </a>
+                        </td>
+                    </tr>                       
                 </c:forEach>
             </table>
         </form>

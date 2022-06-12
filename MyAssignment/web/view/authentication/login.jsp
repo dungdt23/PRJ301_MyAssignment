@@ -17,10 +17,15 @@
             <img src="img/img1.png"/>
         </header>
         <form action="authentication" method="POST">
-            Campus: <select name="campus">
-                <option>FU-HL</option>
+            Campus: <select name="campus">    
+                <c:forEach var="c" items="${requestScope.campus}">
+                    <option value="${c}">
+                        ${c}
+                    </option>
+                </c:forEach>
             </select> <Br/>
-            Lecture: <input type="text" name="lecture"/>
+            Lecture Username: <input type="text" name="username"/> <br/>
+            Lecture Password: <input type="password" name="password"/>
             <input type="submit" value="View"/>
         </form>
     </body>

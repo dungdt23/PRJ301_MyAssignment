@@ -11,12 +11,35 @@ import java.util.ArrayList;
  * @author Admin
  */
 public class Lecture {
+    private String username;
+    private String password;
     private String lectureID;
     private String lectureName;
     private String campus;
     private ArrayList<Group> groupList;
 
     public Lecture() {
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" + "username=" + username + ", password=" + password + ", lectureID=" + lectureID + ", lectureName=" + lectureName + ", campus=" + campus + ", groupList=" + groupList + '}';
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getLectureID() {
