@@ -84,11 +84,9 @@ public class AuthenticationController extends HttpServlet {
             TimeSlotDBContext dbTimeSlot = new TimeSlotDBContext();
             ArrayList<TimeSlot> slots = dbTimeSlot.list();
             request.setAttribute("session", session);
-            request.setAttribute("slots", slots);      
+            request.setAttribute("slots", slots);
             request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
-        }
-        else
-        {
+        } else {
             response.getWriter().println("false");
         }
 

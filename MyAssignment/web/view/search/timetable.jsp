@@ -52,53 +52,53 @@
                     <td style="background-color: #81DAF5">11/06</td>
                     <td style="background-color: #81DAF5">12/06</td>
                 </tr>                 
-<!--                    <tr>
-                        <td>
-                            ${s.slotID}
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201       
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                        <td>
-                            <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
-                            </a>
-                        </td>
-                    </tr>  -->
+                <!--                    <tr>
+                                        <td>
+                ${s.slotID}
+            </td>
+            <td>
+                <a href="attendance">
+                PRJ301-View Materials
+                at DE-C201       
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                MAS291-View Materials
+                at DE-C201
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                MAS291-View Materials
+                at DE-C201
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                MAS291-View Materials
+                at DE-C201
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                PRJ301-View Materials
+                at DE-C201
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                PRJ301-View Materials
+                at DE-C201
+                </a>
+            </td>
+            <td>
+                <a href="attendance">
+                PRJ301-View Materials
+                at DE-C201
+                </a>
+            </td>
+        </tr>  -->
                 <c:forEach var="s" items="${requestScope.slots}">
                     <tr>
                         <td>
@@ -109,43 +109,42 @@
                                 ${requestScope.session.sessionID}
                                 ${requestScope.session.room.getRoomID()}
                                 ${requestScope.session.group.getGroupID()}
-                                ${requestScope.session.timeslot.getSlotID()}
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
+                                MAS291-View Materials
+                                at DE-C201
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
+                                MAS291-View Materials
+                                at DE-C201
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            MAS291-View Materials
-                            at DE-C201
+                                MAS291-View Materials
+                                at DE-C201
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
+                                PRJ301-View Materials
+                                at DE-C201
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
+                                PRJ301-View Materials
+                                at DE-C201
                             </a>
                         </td>
                         <td>
                             <a href="attendance">
-                            PRJ301-View Materials
-                            at DE-C201
+                                PRJ301-View Materials
+                                at DE-C201
                             </a>
                         </td>
                     </tr>                       

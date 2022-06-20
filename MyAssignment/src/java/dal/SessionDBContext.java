@@ -73,7 +73,7 @@ public class SessionDBContext extends DBContext<Session> {
                 Group group = new Group();
                 group.setGroupID(rs.getString("groupID"));
                 Room room = new Room();
-                room.setRoomID("roomID");
+                room.setRoomID(rs.getString("roomID"));
                 TimeSlot timeslot = new TimeSlot();
                 timeslot.setSlotID("slotID");
                 session.setGroup(group);

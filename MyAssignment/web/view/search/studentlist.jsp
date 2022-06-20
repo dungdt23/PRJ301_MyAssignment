@@ -10,7 +10,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link href="view/search/studentlist.css" rel="stylesheet" type="text/css" />
+        <title>Attendance</title>
     </head>
     <body>
         <form action="attendance" method="POST"> 
@@ -39,24 +40,22 @@
                         </td>
                         <td>
                             ${s.studentName}
-
                         </td>
                         <td>
-                            None                        
+                            <img src="img/avatar.jpg" alt=""/>                       
                         </td>
                         <td>
                             None
                         </td>
                         <td>
-                            Absent <input type="radio" checked="checked" name="status"+"${s.studentID}" value="absent"/>
-                            Present <input type="radio" name="status"+"${s.studentID}" value="present"/>
+                            Absent <input type="radio" checked="checked" name="'status'+'${s.studentID}'" value="absent"/>
+                            Present <input type="radio" name="'status'+'${s.studentID}'" value="present"/>
                         </td>
                     </tr>
 
                 </c:forEach>
             </table>
             <input type="submit" value="Save"/>
-
         </form>
     </body>
 </html>
