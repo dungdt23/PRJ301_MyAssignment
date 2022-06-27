@@ -53,6 +53,21 @@ public class LectureDBContext extends DBContext<Lecture> {
         return lectures;
     }
 
+    public String getLectureID(Lecture entity) {
+        try {
+            String sql = "select * from Lecture l where l.lectureID=? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getLectureID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getString("lectureID");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LectureDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     @Override
     public Lecture get(Lecture entity) {
         try {

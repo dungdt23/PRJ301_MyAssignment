@@ -12,6 +12,10 @@
         <servlet-name>SessionController</servlet-name>
         <servlet-class>controller.SessionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TimetableController</servlet-name>
+        <servlet-class>controller.TimetableController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AuthenticationController</servlet-name>
         <url-pattern>/authentication</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>SessionController</servlet-name>
         <url-pattern>/session</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimetableController</servlet-name>
+        <url-pattern>/timetable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

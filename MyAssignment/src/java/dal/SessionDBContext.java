@@ -8,9 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Group;
+import model.Lecture;
 import model.Room;
 import model.Session;
 import model.TimeSlot;
@@ -21,22 +23,31 @@ import model.TimeSlot;
  */
 public class SessionDBContext extends DBContext<Session> {
     public static void main(String[] args) {
-        SessionDBContext db = new SessionDBContext();
-        Session session = db.demo();
-        System.out.println(session.getGroup().getGroupID());
+        SessionDBContext db = new SessionDBContext();   
+        Lecture lecture = new Lecture();
+        lecture.setLectureID("1");
+        TimeSlot slot = new TimeSlot();
+        slot.setSlotID("slot1");
+        ArrayList<Session> list = db.list(lecture, slot,"2000-10-10");
+        for (Session session : list) {
+            System.out.println(session);
+        }
     }
 
-    public ArrayList<Session> list(String lectureID, String slotID) {
+    public ArrayList<Session> list(Lecture lecture, TimeSlot slot,String date) {
         ArrayList<Session> sessions = new ArrayList<>();
+        String lectureID = lecture.getLectureID();
+        String slotID = slot.getSlotID();
         try {
-            String sql = "select s.sessionID,s.groupID,s.roomID,s.slotID from \n"
-                    + "(select e.lectureID,e.lectureName,g.groupID \n"
-                    + "from Lecture  e inner join [Group] g \n"
-                    + "on e.lectureID=g.lectureID\n"
-                    + "where e.lectureID = ? ) as a, Session as s where a.groupID=s.groupID and s.slotID=?";
+            String sql = "select s.sessionID,s.groupID,s.roomID,s.slotID,s.date from \n" +
+"                     (select e.lectureID,e.lectureName,g.groupID \n" +
+"                     from Lecture  e inner join [Group] g \n" +
+"                     on e.lectureID=g.lectureID\n" +
+"                     where e.lectureID = ? ) as a, Session as s where a.groupID=s.groupID and s.slotID=? and s.date=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, lectureID);
             stm.setString(2, slotID);
+            stm.setString(3, date);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session session = new Session();
@@ -50,6 +61,7 @@ public class SessionDBContext extends DBContext<Session> {
                 session.setGroup(group);
                 session.setRoom(room);
                 session.setTimeslot(timeslot);
+                session.setDate(rs.getDate("date"));
                 sessions.add(session);
             }
         } catch (SQLException ex) {

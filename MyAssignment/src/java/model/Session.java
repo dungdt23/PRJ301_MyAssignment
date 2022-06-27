@@ -5,6 +5,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,10 +17,19 @@ public class Session {
     private Room room;
     private TimeSlot timeslot;
     private ArrayList<Attendance> attendanceList;
+    private Date date;
 
     @Override
     public String toString() {
-        return "Session{" + "sessionID=" + sessionID + ", group=" + group + ", room=" + room + ", timeslot=" + timeslot + ", attendanceList=" + attendanceList + '}';
+        return "Session{" + "sessionID=" + sessionID + ", group=" + group + ", room=" + room + ", timeslot=" + timeslot + ", attendanceList=" + attendanceList + ", date=" + date + '}';
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Session() {
