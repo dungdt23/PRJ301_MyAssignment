@@ -15,6 +15,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             Campus: <select name="campus">
                 <option style="font-family: cursive">${lecture.campus}</option>
             </select> <Br/>
+            <input name="lectureName"value="${lecture.lectureName}" type="hidden"/>
             Lecture: <input type="text" name="lecture" value="${lecture.username}" style="font-family: cursive"  readonly/>
             <input type="submit" value="View" style="font-family: cursive"/> </br>
             <div style="font-weight: bold;font-size: 20px">Activities for ${lecture.username} (${lecture.lectureName})</div>
@@ -25,337 +26,354 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         Calendar <br/>
                         <input id="date" type="date" name="date"/>
                     </td >
-                    <c:forEach var="w" items="${requestScope.week}">
-                        <td style="background-color: #00dbdb">${w.toString()}</td> 
+                    <c:forEach var="w" items="${requestScope.weekdays1}">
+                        <td style="background-color: #00dbdb">${w}</td> 
                     </c:forEach>
-<!--                    <td style="background-color: #00dbdb">MON</td>
-                    <td style="background-color: #00dbdb">TUE</td>
-                    <td style="background-color: #00dbdb">WED</td>
-                    <td style="background-color: #00dbdb">THUR</td>
-                    <td style="background-color: #00dbdb">FRI</td>
-                    <td style="background-color: #00dbdb">SAT</td>
-                    <td style="background-color: #00dbdb">SUN</td>-->
                 </tr>  
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 1
-                    </td>
-                    <td>
-                        <a href="attendance">
+                <c:forEach var="s" items="${requestScope.slots}">
+                    <tr>
+                        <td style="background-color: #fa9600">
+                            ${s.slotID} <br/>
+                            ${s.startSlot} - ${s.endSlot} 
+                        </td>
+                        <c:forEach var="w" items="${requestScope.weekdays}">    
+                            <td >
+                                <c:forEach var="se" items="${requestScope.sessions}">
+                                    <c:if test="${se.timeslot.slotID eq s.slotID and se.date.toString() eq w }">
+                                        <a href="attendance?id=${se.sessionID}">
+                                            ${se.group.groupID} - at
+                                            ${se.room.roomID} <br>
+                                        Subject: ${se.group.subject.subjectID}
+                                        </a>
+                                    </c:if>
+                                </c:forEach>     
+                            </td>
 
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
 
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
 
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr>                       
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 2
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600"> 
-                        Slot 3
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 4
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 5
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 6
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 7
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
-                <tr>
-                    <td style="background-color: #fa9600">
-                        Slot 8
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                    <td>
-                        <a href="attendance">
-
-                        </a>
-                    </td>
-                </tr> 
+                <!--                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 1
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr>                       
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 2
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600"> 
+                                        Slot 3
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 4
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 5
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 6
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 7
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td style="background-color: #fa9600">
+                                        Slot 8
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="attendance">
+                
+                                        </a>
+                                    </td>
+                                </tr> -->
             </table>
         </form>
     </body>

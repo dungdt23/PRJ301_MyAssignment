@@ -5,14 +5,21 @@
 package controller;
 
 import dal.DataDBContext;
+import dal.DateDBContext;
 import dal.LectureDBContext;
+import dal.SessionDBContext;
+import dal.TimeSlotDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import model.Lecture;
+import model.Session;
+import model.TimeSlot;
 
 /**
  *
@@ -74,18 +81,40 @@ public class AuthenticationController extends HttpServlet {
         lecture.setPassword(password);
         LectureDBContext dbLecture = new LectureDBContext();
         if (dbLecture.get(lecture) != null) {
+            //lecture
             request.setAttribute("lecture", lecture);
-//            SessionDBContext dbSession = new SessionDBContext();
-//            Session session = dbSession.demo();
-//            TimeSlotDBContext dbTimeSlot = new TimeSlotDBContext();
-//            ArrayList<TimeSlot> slots = dbTimeSlot.list();
-//            request.setAttribute("session", session);
-//            request.setAttribute("slots", slots);
+            //date
+            DateDBContext dbDate = new DateDBContext();
+            Date currentDate = new Date();
+            ArrayList<Date> week = dbDate.getWeek(currentDate);
+            ArrayList<String> weekdays = new ArrayList<>();
+            for (Date date0 : week) {
+                SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+                String strdate0 = format0.format(date0);
+                weekdays.add(strdate0);
+            }
+            request.setAttribute("weekdays", weekdays);
+
+            ArrayList<String> weekdays1 = new ArrayList<>();
+            for (Date date1 : week) {
+                SimpleDateFormat format1 = new SimpleDateFormat("E, dd MMM yyyy");
+                String strdate0 = format1.format(date1);
+                weekdays1.add(strdate0);
+            }
+            request.setAttribute("weekdays1", weekdays1);
+            //slot
+            TimeSlotDBContext dbSlot = new TimeSlotDBContext();
+            ArrayList<TimeSlot> slots = dbSlot.list();
+            request.setAttribute("slots", slots);
+            //session
+            SessionDBContext dbSession = new SessionDBContext();
+            ArrayList<Session> sessions = dbSession.list(lecture);
+            request.setAttribute("sessions", sessions);
+
             request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
         } else {
             response.getWriter().println("failed");
         }
-            
 
     }
 

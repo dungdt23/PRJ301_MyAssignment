@@ -6,6 +6,8 @@ package controller;
 
 import dal.DateDBContext;
 import dal.LectureDBContext;
+import dal.SessionDBContext;
+import dal.TimeSlotDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import model.Lecture;
+import model.Session;
+import model.TimeSlot;
 
 /**
  *
@@ -77,12 +81,18 @@ public class TimetableController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+
+        //set information for lecture
         String lectureUsername = request.getParameter("lecture");
+        String lectureName = request.getParameter("lectureName");
+        String lectureCampus = request.getParameter("campus");
         LectureDBContext dbLecture = new LectureDBContext();
         Lecture lecture = new Lecture();
         lecture.setUsername(lectureUsername);
-        String lectureID = dbLecture.getLectureID(lecture);
-        lecture.setLectureID(lectureID);
+        lecture = dbLecture.getLectureByUsername(lecture);
+//        lecture.setLectureID(lectureID);
+//        lecture.setCampus(lectureCampus);
+//        lecture.setLectureName(lectureName);
         request.setAttribute("lecture", lecture);
         //get date 
         String dateStr = request.getParameter("date");
@@ -92,14 +102,35 @@ public class TimetableController extends HttpServlet {
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
+        //date
         DateDBContext dbDate = new DateDBContext();
         ArrayList<Date> week = dbDate.getWeek(date);
+        ArrayList<String> weekdays = new ArrayList<>();
+        for (Date date0 : week) {
+            SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+            String strdate0 = format0.format(date0);
+            weekdays.add(strdate0);
+        }
+        request.setAttribute("weekdays", weekdays);
+
+        ArrayList<String> weekdays1 = new ArrayList<>();
+        for (Date date1 : week) {
+            SimpleDateFormat format1 = new SimpleDateFormat("E, dd MMM yyyy");
+            String strdate0 = format1.format(date1);
+            weekdays1.add(strdate0);
+        }
+        request.setAttribute("weekdays1", weekdays1);
         request.setAttribute("week", week);
-        
-        
-        
-        
-        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);      
+        //slot
+        TimeSlotDBContext dbSlot = new TimeSlotDBContext();
+        ArrayList<TimeSlot> slots = dbSlot.list();
+        request.setAttribute("slots", slots);
+        //session
+        SessionDBContext dbSession = new SessionDBContext();
+        ArrayList<Session> sessions = dbSession.list(lecture);
+        request.setAttribute("sessions", sessions);
+
+        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
     }
 
     /**

@@ -20,17 +20,7 @@ import model.TimeSlot;
 public class LectureDBContext extends DBContext<Lecture> {
 
     public static void main(String[] args) {
-        LectureDBContext db = new LectureDBContext();
-        ArrayList<Lecture> lectures = db.list();
-        for (Lecture lecture : lectures) {
-            System.out.println(lecture.getLectureName());
-        }
 
-        Lecture test = new Lecture();
-        test.setCampus("FUHL");
-        test.setUsername("a123");
-        test.setPassword("123");
-        System.out.println(db.get(test));
     }
 
     @Override
@@ -53,14 +43,19 @@ public class LectureDBContext extends DBContext<Lecture> {
         return lectures;
     }
 
-    public String getLectureID(Lecture entity) {
+    public Lecture getLectureByUsername(Lecture entity) {
         try {
-            String sql = "select * from Lecture l where l.lectureID=? ";
+            String sql = "select lectureID,campus,password,lectureName \n"
+                    + "from Lecture  where username=?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, entity.getLectureID());
+            stm.setString(1, entity.getUsername());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                return rs.getString("lectureID");
+                entity.setLectureID(rs.getString("lectureID"));
+                entity.setCampus(rs.getString("campus"));
+                entity.setLectureName(rs.getString("lectureName"));
+                entity.setPassword(rs.getString("password"));
+                return entity;
             }
         } catch (SQLException ex) {
             Logger.getLogger(LectureDBContext.class.getName()).log(Level.SEVERE, null, ex);
