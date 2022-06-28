@@ -13,8 +13,17 @@ import java.util.ArrayList;
 public class Student {
     private String studentID;
     private String studentName;
+    private String gmail;
     private ArrayList<Attendance> attendanceList;
     private ArrayList<Group> groupList;
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
 
     public Student() {
     }

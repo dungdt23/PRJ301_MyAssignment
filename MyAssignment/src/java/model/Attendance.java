@@ -12,7 +12,7 @@ public class Attendance {
    private String attendanceID;
    private Student student;
    private Session session;
-   private String attendanceStatus;
+   private boolean attendanceStatus;
 
     public Attendance() {
     }
@@ -29,7 +29,7 @@ public class Attendance {
         return session;
     }
 
-    public String getAttendanceStatus() {
+    public boolean getAttendanceStatus() {
         return attendanceStatus;
     }
 
@@ -45,7 +45,7 @@ public class Attendance {
         this.session = session;
     }
 
-    public void setAttendanceStatus(String attendanceStatus) {
+    public void setAttendanceStatus(boolean attendanceStatus) {
         this.attendanceStatus = attendanceStatus;
     }
    

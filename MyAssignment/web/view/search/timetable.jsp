@@ -40,7 +40,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <td >
                                 <c:forEach var="se" items="${requestScope.sessions}">
                                     <c:if test="${se.timeslot.slotID eq s.slotID and se.date.toString() eq w }">
-                                        <a href="attendance?id=${se.sessionID}">
+                                        <a href="attendance?sessionID=${se.sessionID}">
                                             ${se.group.groupID} - at
                                             ${se.room.roomID} <br>
                                         Subject: ${se.group.subject.subjectID}

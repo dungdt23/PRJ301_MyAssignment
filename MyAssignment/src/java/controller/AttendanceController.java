@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.AttendanceDBContext;
 import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Attendance;
+import model.Session;
 import model.Student;
 
 /**
@@ -60,9 +63,12 @@ public class AttendanceController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         String sessionID = request.getParameter("sessionID");
+        Session session = new Session();
+        session.setSessionID(sessionID);
         StudentDBContext dbStudent = new StudentDBContext();
-        ArrayList<Student> students = dbStudent.list(sessionID);
+        ArrayList<Student> students = dbStudent.list(session);
         request.setAttribute("students", students);
+        request.setAttribute("session", session);
         request.getRequestDispatcher("view/search/studentlist.jsp").forward(request, response);
     }
 
@@ -78,7 +84,33 @@ public class AttendanceController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        
+        String sessionID = request.getParameter("sessionID");
+        Session session = new Session();
+        session.setSessionID(sessionID);
+        StudentDBContext dbStudent = new StudentDBContext();
+        ArrayList<Student> students = dbStudent.list(session);
+        request.setAttribute("students", students);
+
+        AttendanceDBContext dbAttendance = new AttendanceDBContext();
+        for (Student s : students) {
+            Attendance attendance = new Attendance();
+            Student student0 = new Student();
+            student0.setStudentID(request.getParameter(s.getStudentID()));
+            Session session0 = new Session();
+            session0.setSessionID(sessionID);
+            String statusStr = "";
+            statusStr = request.getParameter("status" + s.getStudentID());
+            boolean status = false;                    
+            if (statusStr.equals(" present")) {
+                status = true;
+            }
+            //boolean status = true;
+            attendance.setStudent(student0);
+            attendance.setSession(session);
+            attendance.setAttendanceStatus(status);
+            dbAttendance.insert(attendance);
+        }
+
     }
 
     /**
