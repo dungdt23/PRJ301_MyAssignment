@@ -16,13 +16,14 @@
     <body>
         <form action="attendance" method="POST" style="text-align: center;font-family: cursive"> 
             <input type="hidden" value="${session.sessionID}" name="sessionID" />
+            <a href="authentication"> Home </a>
             <table border="2" style="width: 100%">
                 <tr style="background-color: #fa9600">
                     <td>
-                        StudentID
+                        Student ID
                     </td>
                     <td>
-                        StudentName
+                        Student Name
                     </td>
                     <td>
                         Avatar
@@ -54,7 +55,7 @@
                         </td>
                         <td>
                             Absent <input type="radio" checked="checked" name="status${stu.studentID}" value="absent"/>
-                            Present <input type="radio" name="'status${stu.studentID}" value="present"/>
+                            Present <input type="radio" name="status${stu.studentID}" value="present"/>
                         </td>
                     </tr>
                 </c:forEach>

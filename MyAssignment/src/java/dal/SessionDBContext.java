@@ -31,7 +31,7 @@ public class SessionDBContext extends DBContext<Session> {
         lecture.setLectureID("1");
         
         ArrayList<Session> list = dbSession.list(lecture);
-        DateDBContext dbDate = new DateDBContext();
+        DateHandle dbDate = new DateHandle();
         Date date = new Date();
         ArrayList<Date> week = dbDate.getWeek(date);
 

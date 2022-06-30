@@ -98,12 +98,8 @@ public class AttendanceController extends HttpServlet {
             student0.setStudentID(request.getParameter(s.getStudentID()));
             Session session0 = new Session();
             session0.setSessionID(sessionID);
-            String statusStr = "";
-            statusStr = request.getParameter("status" + s.getStudentID());
-            boolean status = false;                    
-            if (statusStr.equals(" present")) {
-                status = true;
-            }
+            String statusStr = request.getParameter("status" + s.getStudentID());
+            boolean status = statusStr.equals("present");
             //boolean status = true;
             attendance.setStudent(student0);
             attendance.setSession(session);

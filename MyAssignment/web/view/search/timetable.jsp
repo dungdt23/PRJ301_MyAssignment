@@ -20,6 +20,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <input type="submit" value="View" style="font-family: cursive"/> </br>
             <div style="font-weight: bold;font-size: 20px">Activities for ${lecture.username} (${lecture.lectureName})</div>
             <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>
+            <a href="viewattendance?username=${lecture.username}" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px ">View Attendance</a>
             <table border="2" style> 
                 <tr style="background-color: #00dbdb">
                     <td style="background-color: #00dbdb">
@@ -43,7 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                         <a href="attendance?sessionID=${se.sessionID}">
                                             ${se.group.groupID} - at
                                             ${se.room.roomID} <br>
-                                        Subject: ${se.group.subject.subjectID}
+                                            Subject: ${se.group.subject.subjectID}
                                         </a>
                                     </c:if>
                                 </c:forEach>     

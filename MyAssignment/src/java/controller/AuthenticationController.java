@@ -5,7 +5,7 @@
 package controller;
 
 import dal.DataDBContext;
-import dal.DateDBContext;
+import dal.DateHandle;
 import dal.LectureDBContext;
 import dal.SessionDBContext;
 import dal.TimeSlotDBContext;
@@ -84,7 +84,7 @@ public class AuthenticationController extends HttpServlet {
             //lecture
             request.setAttribute("lecture", lecture);
             //date
-            DateDBContext dbDate = new DateDBContext();
+            DateHandle dbDate = new DateHandle();
             Date currentDate = new Date();
             ArrayList<Date> week = dbDate.getWeek(currentDate);
             ArrayList<String> weekdays = new ArrayList<>();

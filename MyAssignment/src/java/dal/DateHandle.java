@@ -14,10 +14,10 @@ import java.util.Date;
  *
  * @author Admin
  */
-public class DateDBContext extends DBContext<Date> {
+public class DateHandle extends DBContext<Date> {
 
     public static void main(String[] args) {
-        String sDate0 = "09-06-2022";
+        String sDate0 = "27-06-2022";
         Date date0 = null;
         try {
             date0 = new SimpleDateFormat("dd-MM-yyyy").parse(sDate0);
@@ -26,7 +26,7 @@ public class DateDBContext extends DBContext<Date> {
         }
 //        System.out.println(date0.getDate());
 //        System.out.println(date0.getDay());
-        DateDBContext db = new DateDBContext();
+        DateHandle db = new DateHandle();
         ArrayList<Date> dates = db.getWeek(date0);
         for (Date date : dates) {
             System.out.println(date.toString());
@@ -43,7 +43,7 @@ public class DateDBContext extends DBContext<Date> {
         ArrayList<Date> dates = new ArrayList<>();
         Calendar c = Calendar.getInstance();
         int dayOfdate0 = date0.getDay();
-        c.set(date0.getYear()+1900, date0.getMonth(), date0.getDate());
+        c.set(date0.getYear() + 1900, date0.getMonth(), date0.getDate());
         //check if choosen day is sunday, set index = 7
         if (dayOfdate0 == 0) {
             dayOfdate0 = 7;
@@ -61,8 +61,10 @@ public class DateDBContext extends DBContext<Date> {
         }
         //add present date into list
         dates.add(date0);
-        //reset calendar to present date
-        c.add(Calendar.DATE, 1);
+        //reset calendar to present date if day not monday
+        if (dayOfdate0 != 1) {
+            c.add(Calendar.DATE, 1);
+        }
         //add from next day to sunday into list
         for (int i = dayOfdate0 + 1; i < 8; i++) {
             int range = 1;
