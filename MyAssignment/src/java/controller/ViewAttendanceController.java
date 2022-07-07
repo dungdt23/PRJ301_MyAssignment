@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import model.Attendance;
 import model.Group;
 import model.Lecture;
@@ -126,6 +127,8 @@ public class ViewAttendanceController extends HttpServlet {
         AttendanceDBContext dbAttendance = new AttendanceDBContext();
         ArrayList<Attendance> attendances = dbAttendance.list(group);
         request.setAttribute("attendances", attendances);
+        HashMap<Student, Integer> absents = dbAttendance.totalAbsent(group);
+        request.setAttribute("absents", absents);
 
         request.getRequestDispatcher("view/search/viewattendance.jsp").forward(request, response);
 
