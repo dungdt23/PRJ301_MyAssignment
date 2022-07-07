@@ -24,12 +24,12 @@ import model.TimeSlot;
  * @author Admin
  */
 public class SessionDBContext extends DBContext<Session> {
-    
+
     public static void main(String[] args) {
         SessionDBContext dbSession = new SessionDBContext();
         Lecture lecture = new Lecture();
         lecture.setLectureID("1");
-        
+
         ArrayList<Session> list = dbSession.list(lecture);
         DateHandle dbDate = new DateHandle();
         Date date = new Date();
@@ -63,9 +63,16 @@ public class SessionDBContext extends DBContext<Session> {
             }
             System.out.println("end");
         }
-        
+
+        Group group = new Group();
+        group.setGroupID("G1");
+        ArrayList<Session> sessions = dbSession.list(group);
+        for (Session session : sessions) {
+            System.out.println(session.getDate());
+        }
+
     }
-    
+
     public ArrayList<Session> list(Lecture lecture) {
         ArrayList<Session> sessions = new ArrayList<>();
         String lectureID = lecture.getLectureID();
@@ -101,30 +108,79 @@ public class SessionDBContext extends DBContext<Session> {
         }
         return sessions;
     }
-    
+
+    public ArrayList<Session> list(Group entity) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        try {
+            String sql = "select s.sessionID,s.[date] from [Session] s where s.groupID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getGroupID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                session.setSessionID(rs.getString("sessionID"));
+//                Group group = new Group();
+//                group.setGroupID(rs.getString("groupID"));
+//                Room room = new Room();
+//                room.setRoomID(rs.getString("roomID"));
+//                TimeSlot timeslot = new TimeSlot();
+//                timeslot.setSlotID(rs.getString("slotID"));
+//                session.setGroup(group);
+//                session.setRoom(room);
+//                session.setTimeslot(timeslot);
+                session.setDate(rs.getDate("date"));
+//                Subject subject = new Subject();
+//                subject.setSubjectID(rs.getString("subjectID"));
+//                group.setSubject(subject);
+                sessions.add(session);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+
+    }
+
+    public int getTotalSession(Group group) {
+        int total = 0;
+        try {
+            String sql = "select COUNT(sessionID) as total\n"
+                    + "from [Session] where [groupID]=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, group.getGroupID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                total=rs.getInt("total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+
     @Override
     public ArrayList<Session> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public Session get(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void insert(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void update(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void delete(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

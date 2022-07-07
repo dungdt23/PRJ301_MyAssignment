@@ -4,8 +4,11 @@
  */
 package controller;
 
+import dal.AttendanceDBContext;
 import dal.LectureDBContext;
 import dal.GroupDBContext;
+import dal.SessionDBContext;
+import dal.StudentDBContext;
 import dal.SubjectDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,10 +17,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Attendance;
 import model.Group;
 import model.Lecture;
+import model.Session;
+import model.Student;
 import model.Subject;
-
 
 /**
  *
@@ -42,7 +47,7 @@ public class ViewAttendanceController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAttendanceController</title>");            
+            out.println("<title>Servlet ViewAttendanceController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ViewAttendanceController at " + request.getContextPath() + "</h1>");
@@ -65,25 +70,19 @@ public class ViewAttendanceController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         //lecture
-        String lectureUsername = request.getParameter("username");
+        String lectureID = request.getParameter("lectureID");
         Lecture lecture = new Lecture();
-        lecture.setUsername(lectureUsername);
+        lecture.setLectureID(lectureID);
         LectureDBContext dbLecture = new LectureDBContext();
-        lecture = dbLecture.getLectureByUsername(lecture);
+        lecture = dbLecture.getLectureByID(lecture);
         request.setAttribute("lecture", lecture);
         //groups belong to lecture
         GroupDBContext dbGroup = new GroupDBContext();
         ArrayList<Group> groups = dbGroup.list(lecture);
         request.setAttribute("groups", groups);
-        //subjects belong to lecture
-        SubjectDBContext dbSubject = new SubjectDBContext();
-        ArrayList<Subject> subjects = dbSubject.list(lecture);
-        request.setAttribute("subjects", subjects);
-        
+
         request.getRequestDispatcher("view/search/viewattendance.jsp").forward(request, response);
-        
-        
-        
+
     }
 
     /**
@@ -97,7 +96,39 @@ public class ViewAttendanceController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+
+        //lecture
+        String lectureID = request.getParameter("lectureID");
+        Lecture lecture = new Lecture();
+        lecture.setLectureID(lectureID);
+        LectureDBContext dbLecture = new LectureDBContext();
+        lecture = dbLecture.getLectureByID(lecture);
+        request.setAttribute("lecture", lecture);
+        //groups belong to lecture
+        GroupDBContext dbGroup = new GroupDBContext();
+        ArrayList<Group> groups = dbGroup.list(lecture);
+        request.setAttribute("groups", groups);
+
+        String choosenGroupID = request.getParameter("group");
+        Group group = new Group();
+        group.setGroupID(choosenGroupID);
+        StudentDBContext dbStudent = new StudentDBContext();
+        ArrayList<Student> students = dbStudent.list(group);
+        request.setAttribute("students", students);
+
+        SessionDBContext dbSession = new SessionDBContext();
+        ArrayList<Session> sessions = dbSession.list(group);
+        request.setAttribute("sessions", sessions);
+        int totalSessions = dbSession.getTotalSession(group);
+        request.setAttribute("total", totalSessions);
+
+        AttendanceDBContext dbAttendance = new AttendanceDBContext();
+        ArrayList<Attendance> attendances = dbAttendance.list(group);
+        request.setAttribute("attendances", attendances);
+
+        request.getRequestDispatcher("view/search/viewattendance.jsp").forward(request, response);
+
     }
 
     /**

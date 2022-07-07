@@ -20,7 +20,11 @@ import model.TimeSlot;
 public class LectureDBContext extends DBContext<Lecture> {
 
     public static void main(String[] args) {
-
+        Lecture lecture = new Lecture();
+        lecture.setLectureID("1");
+        LectureDBContext dbLecture = new LectureDBContext();
+        lecture = dbLecture.getLectureByID(lecture);
+        System.out.println(lecture.getLectureName());
     }
 
     @Override
@@ -55,6 +59,27 @@ public class LectureDBContext extends DBContext<Lecture> {
                 entity.setCampus(rs.getString("campus"));
                 entity.setLectureName(rs.getString("lectureName"));
                 entity.setPassword(rs.getString("password"));
+                return entity;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LectureDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Lecture getLectureByID(Lecture entity) {
+        try {
+            String sql = "select lectureID,campus,password,lectureName,username \n"
+                    + "from Lecture  where lectureID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getLectureID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                entity.setLectureID(rs.getString("lectureID"));
+                entity.setCampus(rs.getString("campus"));
+                entity.setLectureName(rs.getString("lectureName"));
+                entity.setPassword(rs.getString("password"));
+                entity.setUsername(rs.getString("username"));
                 return entity;
             }
         } catch (SQLException ex) {

@@ -21,15 +21,17 @@ import model.TimeSlot;
  * @author Admin
  */
 public class StudentDBContext extends DBContext<Student> {
-    
+
     public static void main(String[] args) {
-//        StudentDBContext db = new StudentDBContext();
-//        ArrayList<Student> students = db.list("SE1");
-//        for (Student student : students) {
-//            System.out.println(student.getStudentID());
-//        }
+        Group group = new Group();
+        group.setGroupID("G1");
+        StudentDBContext dbStudent = new StudentDBContext();
+        ArrayList<Student> students = dbStudent.list(group);
+        for (Student student : students) {
+            System.out.println(student.getStudentID());
+        }
     }
-    
+
     public ArrayList<Student> list(Session session) {
         ArrayList<Student> students = new ArrayList<>();
         try {
@@ -51,30 +53,51 @@ public class StudentDBContext extends DBContext<Student> {
         }
         return students;
     }
-    
+
+    public ArrayList<Student> list(Group group) {
+        ArrayList<Student> students = new ArrayList<>();
+        try {
+            String sql = "select s.studentID,s.studentName \n"
+                    + "from Student s, (select e.studentID from Enroll e where e.groupID=?) a\n"
+                    + "where s.studentID=a.studentID";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, group.getGroupID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setStudentID(rs.getString("studentID"));
+                student.setStudentName(rs.getString("studentName"));
+                students.add(student);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return students;
+    }
+
     @Override
     public ArrayList<Student> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public Student get(Student entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void insert(Student entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void update(Student entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void delete(Student entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
