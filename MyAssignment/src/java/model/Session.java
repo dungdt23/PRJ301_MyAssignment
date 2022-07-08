@@ -18,6 +18,7 @@ public class Session {
     private TimeSlot timeslot;
     private ArrayList<Attendance> attendanceList;
     private Date date;
+    private boolean attendanceStatus;
 
     @Override
     public String toString() {
@@ -26,6 +27,14 @@ public class Session {
 
     public Date getDate() {
         return date;
+    }
+
+    public boolean isAttendanceStatus() {
+        return attendanceStatus;
+    }
+
+    public void setAttendanceStatus(boolean attendanceStatus) {
+        this.attendanceStatus = attendanceStatus;
     }
 
     public void setDate(Date date) {

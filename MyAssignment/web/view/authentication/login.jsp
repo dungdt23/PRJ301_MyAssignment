@@ -14,7 +14,7 @@
     </head>
     <body>
         <header>
-            <img src="img/img1.png"/>
+<!--            <img src="img/img1.png"/>-->
         </header>
         <form action="authentication" method="POST">
             Campus: <select name="campus">    

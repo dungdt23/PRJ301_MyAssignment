@@ -54,10 +54,14 @@ public class AuthenticationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         DataDBContext dbData = new DataDBContext();
-        ArrayList<String> campus = dbData.campus();
-        LectureDBContext dbLecture = new LectureDBContext();
-        ArrayList<Lecture> lectures = dbLecture.list();
-        request.setAttribute("campus", campus);
+        ArrayList<String> campuses = dbData.campus();
+        //LectureDBContext dbLecture = new LectureDBContext();
+        //ArrayList<Lecture> lectures = dbLecture.list();
+        request.setAttribute("campus", campuses);
+        String campus = request.getParameter("campus");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
         request.getRequestDispatcher("view/authentication/login.jsp").forward(request, response);
     }
 

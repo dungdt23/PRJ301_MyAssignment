@@ -77,7 +77,7 @@ public class SessionDBContext extends DBContext<Session> {
         ArrayList<Session> sessions = new ArrayList<>();
         String lectureID = lecture.getLectureID();
         try {
-            String sql = "select s.sessionID,a.groupID,a.subjectID,s.roomID,s.date,s.slotID from Session s,\n"
+            String sql = "select s.sessionID,a.groupID,a.subjectID,s.roomID,s.date,s.slotID,s.attendanceStatus from Session s,\n"
                     + "(select l.lectureID,l.lectureName,g.groupID ,g.subjectID\n"
                     + "from Lecture l inner join [Group] g \n"
                     + "on l.lectureID=g.lectureID where l.lectureID=?) a \n"
@@ -101,6 +101,7 @@ public class SessionDBContext extends DBContext<Session> {
                 Subject subject = new Subject();
                 subject.setSubjectID(rs.getString("subjectID"));
                 group.setSubject(subject);
+                session.setAttendanceStatus(rs.getBoolean("attendanceStatus"));
                 sessions.add(session);
             }
         } catch (SQLException ex) {
@@ -150,7 +151,7 @@ public class SessionDBContext extends DBContext<Session> {
             stm.setString(1, group.getGroupID());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                total=rs.getInt("total");
+                total = rs.getInt("total");
             }
         } catch (SQLException ex) {
             Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -165,7 +166,31 @@ public class SessionDBContext extends DBContext<Session> {
 
     @Override
     public Session get(Session entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "select s.groupID,s.roomID,s.slotID,s.attendanceStatus \n"
+                    + "from [Session] s where s.sessionID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getSessionID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                session.setSessionID(entity.getSessionID());
+                Group group = new Group();
+                group.setGroupID(rs.getString("groupID"));
+                Room room = new Room();
+                room.setRoomID(rs.getString("roomID"));
+                TimeSlot timeslot = new TimeSlot();
+                timeslot.setSlotID(rs.getString("slotID"));
+                session.setGroup(group);
+                session.setRoom(room);
+                session.setTimeslot(timeslot);
+                session.setAttendanceStatus(rs.getBoolean("attendanceStatus"));
+                return session;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     @Override
@@ -181,6 +206,20 @@ public class SessionDBContext extends DBContext<Session> {
     @Override
     public void delete(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void updateAttendace(Session entity) {
+        try {
+            String sql = "UPDATE [dbo].[Session]\n"
+                    + "   SET \n"
+                    + "      [attendanceStatus] = 1\n"
+                    + " WHERE [Session].sessionID = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getSessionID());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

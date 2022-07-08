@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AttendanceDBContext;
+import dal.SessionDBContext;
 import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -90,7 +91,7 @@ public class AttendanceController extends HttpServlet {
         StudentDBContext dbStudent = new StudentDBContext();
         ArrayList<Student> students = dbStudent.list(session);
         request.setAttribute("students", students);
-
+        
         AttendanceDBContext dbAttendance = new AttendanceDBContext();
         for (Student s : students) {
             Attendance attendance = new Attendance();
@@ -106,6 +107,9 @@ public class AttendanceController extends HttpServlet {
             attendance.setAttendanceStatus(status);
             dbAttendance.insert(attendance);
         }
+        
+        SessionDBContext dbSession = new SessionDBContext();
+        dbSession.updateAttendace(session);
 
     }
 

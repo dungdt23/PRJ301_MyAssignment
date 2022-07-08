@@ -11,21 +11,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Timetable</title>
     </head>
     <body>
-        <form action="timetable" method="POST" style="text-align: center;font-family: cursive">
+        <form id="dungdt" action="timetable" method="POST" style="text-align: center;font-family: cursive">
             Campus: <select name="campus">
                 <option style="font-family: cursive">${lecture.campus}</option>
             </select> <Br/>
             <input name="lectureName"value="${lecture.lectureName}" type="hidden"/>
-            Lecture: <input type="text" name="lecture" value="${lecture.username}" style="font-family: cursive"  readonly/>
+            Lecture: <input type="text" name="username" value="${lecture.username}" style="font-family: cursive"  readonly/>
             <input type="submit" value="View" style="font-family: cursive"/> </br>
             <div style="font-weight: bold;font-size: 20px">Activities for ${lecture.username} (${lecture.lectureName})</div>         
-<!--                <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>           -->
+            <!--                <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>           -->
             <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px ">View Attendance</a>
             <table border="2" style> 
                 <tr style="background-color: #00dbdb">
                     <td style="background-color: #00dbdb">
                         Calendar <br/>
-                        <input id="date" type="date" name="date"/>
+                        <input id="date" type="date" name="date""/>
                     </td >
                     <c:forEach var="w" items="${requestScope.weekdays1}">
                         <td style="background-color: #00dbdb">${w}</td> 
@@ -45,6 +45,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                                             ${se.group.groupID} - at
                                             ${se.room.roomID} <br>
                                             Subject: ${se.group.subject.subjectID}
+                                            <c:if test="${se.attendanceStatus eq 'true'}">
+                                                <p style="color: green">Attended</p>
+                                            </c:if>
+                                            <c:if test="${se.attendanceStatus eq 'false'}">
+                                                <p style="color: red">Not yet</p>
+
+                                            </c:if>
                                         </a>
                                     </c:if>
                                 </c:forEach>     
@@ -55,5 +62,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 </c:forEach>
             </table>
         </form>
+
     </body>
 </html>

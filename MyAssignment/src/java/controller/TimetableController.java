@@ -67,7 +67,6 @@ public class TimetableController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-
     }
 
     /**
@@ -84,7 +83,7 @@ public class TimetableController extends HttpServlet {
         //processRequest(request, response);
 
         //set information for lecture
-        String lectureUsername = request.getParameter("lecture");
+        String lectureUsername = request.getParameter("username");
         String lectureName = request.getParameter("lectureName");
         String lectureCampus = request.getParameter("campus");
         LectureDBContext dbLecture = new LectureDBContext();
