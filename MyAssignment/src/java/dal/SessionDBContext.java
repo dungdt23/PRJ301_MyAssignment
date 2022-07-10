@@ -70,6 +70,10 @@ public class SessionDBContext extends DBContext<Session> {
         for (Session session : sessions) {
             System.out.println(session.getDate());
         }
+        Session entity = new Session();
+        entity.setSessionID("SE1");
+        System.out.println("-------------------------");
+        System.out.println(dbSession.checkAttendance(entity));
 
     }
 
@@ -220,6 +224,24 @@ public class SessionDBContext extends DBContext<Session> {
         } catch (SQLException ex) {
             Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public boolean checkAttendance(Session entity) {
+        try {
+            String sql = "select s.attendanceStatus from [Session] s\n"
+                    + "where s.sessionID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getSessionID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                if (rs.getBoolean("attendanceStatus")) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
 }

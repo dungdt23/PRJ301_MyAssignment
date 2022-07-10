@@ -92,25 +92,42 @@ public class AttendanceController extends HttpServlet {
         ArrayList<Student> students = dbStudent.list(session);
         request.setAttribute("students", students);
         
+        SessionDBContext dbSession = new SessionDBContext();
+        
         AttendanceDBContext dbAttendance = new AttendanceDBContext();
-        for (Student s : students) {
-            Attendance attendance = new Attendance();
-            Student student0 = new Student();
-            student0.setStudentID(request.getParameter(s.getStudentID()));
-            Session session0 = new Session();
-            session0.setSessionID(sessionID);
-            String statusStr = request.getParameter("status" + s.getStudentID());
-            boolean status = statusStr.equals("present");
-            //boolean status = true;
-            attendance.setStudent(student0);
-            attendance.setSession(session);
-            attendance.setAttendanceStatus(status);
-            dbAttendance.insert(attendance);
+
+        //check if this session is attended or not
+        if (!dbSession.checkAttendance(session)) {
+            for (Student s : students) {
+                Attendance attendance = new Attendance();
+                Student student0 = new Student();
+                student0.setStudentID(request.getParameter(s.getStudentID()));
+                Session session0 = new Session();
+                session0.setSessionID(sessionID);
+                String statusStr = request.getParameter("status" + s.getStudentID());
+                boolean status = statusStr.equals("present");
+                //boolean status = true;
+                attendance.setStudent(student0);
+                attendance.setSession(session);
+                attendance.setAttendanceStatus(status);
+                dbAttendance.insert(attendance);
+            }
+        } else {
+            ArrayList<Attendance> existedAttendaces = dbAttendance.existedAttendances(session);
+            for (Attendance ea : existedAttendaces) {
+                for (Student s : students) {
+                    if (ea.getStudent().getStudentID().equals(s.getStudentID())) {
+                        String statusStr = request.getParameter("status" + s.getStudentID());
+                        boolean status = statusStr.equals("present");
+                        ea.setAttendanceStatus(status);
+                        dbAttendance.update(ea);
+                    }
+                }
+            }
         }
         
-        SessionDBContext dbSession = new SessionDBContext();
         dbSession.updateAttendace(session);
-
+        
     }
 
     /**

@@ -76,6 +76,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
 
     public HashMap<Student, Integer> totalAbsent(Group entity) {
         HashMap<Student, Integer> totalAbsent = new HashMap<>();
+        StudentDBContext dbStudent = new StudentDBContext();
         try {
             String sql = "select a.studentID,count(a.attendanceStatus) as 'totalabsent' from Attendance a ,\n"
                     + "(select s.groupID,s.sessionID,s.[date]\n"
@@ -85,12 +86,28 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, entity.getGroupID());
             ResultSet rs = stm.executeQuery();
+            ArrayList<Student> students = dbStudent.list(entity);
+
             while (rs.next()) {
                 Student s = new Student();
                 s.setStudentID(rs.getString("studentID"));
                 Integer absents = rs.getInt("totalabsent");
                 totalAbsent.put(s, absents);
             }
+
+            for (Student s : students) {
+                boolean check = false;
+                for (Student key : totalAbsent.keySet()) {
+                    if (s.getStudentID().equals(key.getStudentID())) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    totalAbsent.put(s, 0);
+                }
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,9 +146,45 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         }
     }
 
+    public ArrayList<Attendance> existedAttendances(Session entity) {
+        ArrayList<Attendance> attendances = new ArrayList<>();
+        try {
+            String sql = "select attendanceID,studentID,attendanceStatus \n"
+                    + "from Attendance \n"
+                    + "where sessionID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getSessionID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Attendance a = new Attendance();
+                a.setAttendanceID(rs.getString("attendanceID"));
+                Student s = new Student();
+                s.setStudentID(rs.getString("studentID"));
+                a.setStudent(s);
+                a.setAttendanceStatus(rs.getBoolean("attendanceStatus"));
+                attendances.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return attendances;
+    }
+
     @Override
     public void update(Attendance entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            String sql = "UPDATE [dbo].[Attendance]\n"
+                    + "   SET   "
+                    + "         "
+                    + "      [attendanceStatus] = ?     \n"
+                    + " WHERE [Attendance].attendanceID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setBoolean(1, entity.getAttendanceStatus());
+            stm.setString(2, entity.getAttendanceID());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
