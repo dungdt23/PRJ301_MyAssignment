@@ -26,7 +26,7 @@ import model.TimeSlot;
  *
  * @author Admin
  */
-public class TimetableController extends HttpServlet {
+public class TimetableController extends BaseRequiredAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,9 +64,42 @@ public class TimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        Lecture lecture = (Lecture) request.getSession().getAttribute("lecture");
+//        String username = lecture.getUsername();
+//        String lectureName = lecture.getLectureName();
+//        String campus = lecture.getCampus();
+        request.setAttribute("lecture", lecture);
+        DateHandle dbDate = new DateHandle();
+        Date currentDate = new Date();
+        ArrayList<Date> week = dbDate.getWeek(currentDate);
+        ArrayList<String> weekdays = new ArrayList<>();
+        for (Date date0 : week) {
+            SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+            String strdate0 = format0.format(date0);
+            weekdays.add(strdate0);
+        }
+        request.setAttribute("weekdays", weekdays);
+
+        ArrayList<String> weekdays1 = new ArrayList<>();
+        for (Date date1 : week) {
+            SimpleDateFormat format1 = new SimpleDateFormat("E, dd MMM yyyy");
+            String strdate0 = format1.format(date1);
+            weekdays1.add(strdate0);
+        }
+        request.setAttribute("weekdays1", weekdays1);
+        //slot
+        TimeSlotDBContext dbSlot = new TimeSlotDBContext();
+        ArrayList<TimeSlot> slots = dbSlot.list();
+        request.setAttribute("slots", slots);
+        //session
+        SessionDBContext dbSession = new SessionDBContext();
+        ArrayList<Session> sessions = dbSession.list(lecture);
+        request.setAttribute("sessions", sessions);
+
+        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
     }
 
     /**
@@ -78,7 +111,7 @@ public class TimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
 

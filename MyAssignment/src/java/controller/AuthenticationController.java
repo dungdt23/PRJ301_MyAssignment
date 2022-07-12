@@ -85,37 +85,41 @@ public class AuthenticationController extends HttpServlet {
         lecture.setPassword(password);
         LectureDBContext dbLecture = new LectureDBContext();
         if (dbLecture.get(lecture) != null) {
+            request.getSession().setAttribute("lecture", lecture);
             //lecture
-            request.setAttribute("lecture", lecture);
-            //date
-            DateHandle dbDate = new DateHandle();
-            Date currentDate = new Date();
-            ArrayList<Date> week = dbDate.getWeek(currentDate);
-            ArrayList<String> weekdays = new ArrayList<>();
-            for (Date date0 : week) {
-                SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
-                String strdate0 = format0.format(date0);
-                weekdays.add(strdate0);
-            }
-            request.setAttribute("weekdays", weekdays);
-
-            ArrayList<String> weekdays1 = new ArrayList<>();
-            for (Date date1 : week) {
-                SimpleDateFormat format1 = new SimpleDateFormat("E, dd MMM yyyy");
-                String strdate0 = format1.format(date1);
-                weekdays1.add(strdate0);
-            }
-            request.setAttribute("weekdays1", weekdays1);
-            //slot
-            TimeSlotDBContext dbSlot = new TimeSlotDBContext();
-            ArrayList<TimeSlot> slots = dbSlot.list();
-            request.setAttribute("slots", slots);
-            //session
-            SessionDBContext dbSession = new SessionDBContext();
-            ArrayList<Session> sessions = dbSession.list(lecture);
-            request.setAttribute("sessions", sessions);
-
-            request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
+//            request.setAttribute("lecture", lecture);
+//            //date
+//            DateHandle dbDate = new DateHandle();
+//            Date currentDate = new Date();
+//            ArrayList<Date> week = dbDate.getWeek(currentDate);
+//            ArrayList<String> weekdays = new ArrayList<>();
+//            for (Date date0 : week) {
+//                SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
+//                String strdate0 = format0.format(date0);
+//                weekdays.add(strdate0);
+//            }
+//            request.setAttribute("weekdays", weekdays);
+//
+//            ArrayList<String> weekdays1 = new ArrayList<>();
+//            for (Date date1 : week) {
+//                SimpleDateFormat format1 = new SimpleDateFormat("E, dd MMM yyyy");
+//                String strdate0 = format1.format(date1);
+//                weekdays1.add(strdate0);
+//            }
+//            request.setAttribute("weekdays1", weekdays1);
+//            //slot
+//            TimeSlotDBContext dbSlot = new TimeSlotDBContext();
+//            ArrayList<TimeSlot> slots = dbSlot.list();
+//            request.setAttribute("slots", slots);
+//            //session
+//            SessionDBContext dbSession = new SessionDBContext();
+//            ArrayList<Session> sessions = dbSession.list(lecture);
+//            request.setAttribute("sessions", sessions);
+//
+//            request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
+              //response.getWriter().println("Hello" + lecture.getLectureName());  
+              request.setAttribute("lecture", lecture);
+              request.getRequestDispatcher("view/authentication/login_confirm.jsp").forward(request, response);
         } else {
             response.getWriter().println("failed");
         }

@@ -16,7 +16,8 @@
     <body>
         <form action="attendance" method="POST" style="text-align: center;font-family: cursive"> 
             <input type="hidden" value="${session.sessionID}" name="sessionID" />
-            <a href="authentication"> Home </a>
+            <a href="timetable"> Home </a>
+            <a href="authentication" style="font-family: cursive">Logout</a><Br>
             <table border="2" style="width: 100%">
                 <tr style="background-color: #fa9600">
                     <td>
@@ -59,97 +60,6 @@
                         </td>
                     </tr>
                 </c:forEach>
-
-                <!--                <tr>
-                                    <td>
-                                        HE1600001
-                                    </td>
-                                    <td>
-                                        Student Name
-                                    </td>
-                                    <td>
-                                        <img src="../../img/empty-avatar.jpg" alt=""/>                       
-                                    </td>
-                                    <td>
-                                        stuhe160001@fpt.edu.vn
-                                    </td>
-                                    <td>
-                                        Absent <input type="radio" checked="checked" name="status1" value="absent"/>
-                                        Present <input type="radio" name="status1" value="present"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        HE1600002
-                                    </td>
-                                    <td>
-                                        Student Name
-                                    </td>
-                                    <td>
-                                        <img src="../../img/empty-avatar.jpg" alt=""/>                       
-                                    </td>
-                                    <td>
-                                        stuhe1600002@fpt.edu.vn
-                                    </td>
-                                    <td>
-                                        Absent <input type="radio" checked="checked" name="status2" value="absent"/>
-                                        Present <input type="radio" name="status2" value="present"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        HE1600003
-                                    </td>
-                                    <td>
-                                        Student Name
-                                    </td>
-                                    <td>
-                                        <img src="../../img/empty-avatar.jpg" alt=""/>                       
-                                    </td>
-                                    <td>
-                                        stuhe160003@fpt.edu.vn
-                                    </td>
-                                    <td>
-                                        Absent <input type="radio" checked="checked" name="status3" value="absent"/>
-                                        Present <input type="radio" name="status3" value="present"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        HE1600004
-                                    </td>
-                                    <td>
-                                        Student Name
-                                    </td>
-                                    <td>
-                                        <img src="../../img/empty-avatar.jpg" alt=""/>                       
-                                    </td>
-                                    <td>
-                                        stuhe160004@fpt.edu.vn
-                                    </td>
-                                    <td>
-                                        Absent <input type="radio" checked="checked" name="status4" value="absent"/>
-                                        Present <input type="radio" name="status4" value="present"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        HE1600005
-                                    </td>
-                                    <td>
-                                        Student Name
-                                    </td>
-                                    <td>
-                                        <img src="../../img/empty-avatar.jpg" alt=""/>                       
-                                    </td>
-                                    <td>
-                                        stuhe160005@fpt.edu.vn
-                                    </td>
-                                    <td>
-                                        Absent <input type="radio" checked="checked" name="status5" value="absent"/>
-                                        Present <input type="radio" name="status5" value="present"/>
-                                    </td>
-                                </tr>-->
             </table> </br>
             <input type="submit" value="Save" style="text-align: center;padding: 10px 20px;font-size: 20px;background-color: #00dbdb;border-radius: 10%"/>
         </form>

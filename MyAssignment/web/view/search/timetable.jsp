@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Timetable</title>
     </head>
     <body>
-        <form id="dungdt" action="timetable" method="POST" style="text-align: center;font-family: cursive">
+        <form id="dungdt" action="timetable" method="POST" style="font-family: cursive">
             Campus: <select name="campus">
                 <option style="font-family: cursive">${lecture.campus}</option>
             </select> <Br/>
@@ -19,8 +19,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             Lecture: <input type="text" name="username" value="${lecture.username}" style="font-family: cursive"  readonly/>
             <input type="submit" value="View" style="font-family: cursive"/> </br>
             <div style="font-weight: bold;font-size: 20px">Activities for ${lecture.username} (${lecture.lectureName})</div>         
-            <!--                <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>           -->
-            <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px ">View Attendance</a>
+            <!--                <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>  
+            -->     
+            <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-family: cursive">View Attendance</a>
+            <a href="authentication" style="font-family: cursive">Logout</a><Br>      
             <table border="2" style> 
                 <tr style="background-color: #00dbdb">
                     <td style="background-color: #00dbdb">
