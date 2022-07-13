@@ -55,8 +55,24 @@
 
                         </td>
                         <td>
-                            Absent <input type="radio" checked="checked" name="status${stu.studentID}" value="absent"/>
-                            Present <input type="radio" name="status${stu.studentID}" value="present"/>
+                            <c:if test="${requestScope.existedAttendance eq null}">
+                                Absent <input type="radio" checked="checked" name="status${stu.studentID}" value="absent"/>
+                                Present <input type="radio" name="status${stu.studentID}" value="present"/>                                
+                            </c:if>
+                            <c:if test="${requestScope.existedAttendance ne null}">
+                                <c:forEach var="ea" items="${requestScope.existedAttendance}">
+                                    <c:if test="${ea.student.studentID eq stu.studentID}">
+                                        <c:if test="${ea.attendanceStatus eq false}">
+                                            Absent <input type="radio" checked="checked" name="status${stu.studentID}" value="absent"/>
+                                            Present <input type="radio" name="status${stu.studentID}" value="present"/>                                             
+                                        </c:if>
+                                        <c:if test="${ea.attendanceStatus eq true}">
+                                            Absent <input type="radio"  name="status${stu.studentID}" value="absent"/>
+                                            Present <input type="radio" checked="checked" name="status${stu.studentID}" value="present"/>                                               
+                                        </c:if>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>

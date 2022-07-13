@@ -115,6 +115,31 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         return totalAbsent;
     }
 
+    public ArrayList<Attendance> list(Session entity) {
+        ArrayList<Attendance> attendances = new ArrayList<>();
+        try {
+            String sql = "select a.attendanceID,a.studentID,a.attendanceStatus \n"
+                    + "from Attendance a\n"
+                    + "where a.sessionID=?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, entity.getSessionID());
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Attendance a = new Attendance();
+                a.setAttendanceID(rs.getString("attendanceID"));
+                a.setAttendanceStatus(rs.getBoolean("attendanceStatus"));
+                Student s = new Student();
+                s.setStudentID(rs.getString("studentID"));
+                a.setStudent(s);
+                attendances.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return attendances;
+    }
+
     @Override
     public ArrayList<Attendance> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -147,6 +172,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     }
 
     public ArrayList<Attendance> existedAttendances(Session entity) {
+        boolean checkExist = false;
         ArrayList<Attendance> attendances = new ArrayList<>();
         try {
             String sql = "select attendanceID,studentID,attendanceStatus \n"
@@ -156,6 +182,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             stm.setString(1, entity.getSessionID());
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
+                checkExist = true;
                 Attendance a = new Attendance();
                 a.setAttendanceID(rs.getString("attendanceID"));
                 Student s = new Student();
@@ -166,6 +193,9 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (!checkExist) {
+            attendances=null;
         }
         return attendances;
     }

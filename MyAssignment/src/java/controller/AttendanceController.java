@@ -70,6 +70,10 @@ public class AttendanceController extends HttpServlet {
         ArrayList<Student> students = dbStudent.list(session);
         request.setAttribute("students", students);
         request.setAttribute("session", session);
+
+        AttendanceDBContext dbAttendance = new AttendanceDBContext();
+        ArrayList<Attendance> existedAttendance = dbAttendance.existedAttendances(session);
+        request.setAttribute("existedAttendance", existedAttendance);
         request.getRequestDispatcher("view/search/studentlist.jsp").forward(request, response);
     }
 
@@ -91,9 +95,9 @@ public class AttendanceController extends HttpServlet {
         StudentDBContext dbStudent = new StudentDBContext();
         ArrayList<Student> students = dbStudent.list(session);
         request.setAttribute("students", students);
-        
+
         SessionDBContext dbSession = new SessionDBContext();
-        
+
         AttendanceDBContext dbAttendance = new AttendanceDBContext();
 
         //check if this session is attended or not
@@ -125,9 +129,9 @@ public class AttendanceController extends HttpServlet {
                 }
             }
         }
-        
+
         dbSession.updateAttendace(session);
-        
+
     }
 
     /**
