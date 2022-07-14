@@ -99,7 +99,7 @@ public class TimetableController extends BaseRequiredAuthenticationController {
         ArrayList<Session> sessions = dbSession.list(lecture);
         request.setAttribute("sessions", sessions);
 
-        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
+        request.getRequestDispatcher("view/mains/timetable.jsp").forward(request, response);
     }
 
     /**
@@ -163,7 +163,7 @@ public class TimetableController extends BaseRequiredAuthenticationController {
         ArrayList<Session> sessions = dbSession.list(lecture);
         request.setAttribute("sessions", sessions);
 
-        request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
+        request.getRequestDispatcher("view/mains/timetable.jsp").forward(request, response);
     }
 
     /**

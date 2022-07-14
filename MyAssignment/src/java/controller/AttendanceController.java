@@ -74,7 +74,7 @@ public class AttendanceController extends HttpServlet {
         AttendanceDBContext dbAttendance = new AttendanceDBContext();
         ArrayList<Attendance> existedAttendance = dbAttendance.existedAttendances(session);
         request.setAttribute("existedAttendance", existedAttendance);
-        request.getRequestDispatcher("view/search/studentlist.jsp").forward(request, response);
+        request.getRequestDispatcher("view/mains/attendance.jsp").forward(request, response);
     }
 
     /**

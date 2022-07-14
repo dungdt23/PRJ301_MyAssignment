@@ -71,18 +71,19 @@ public class ViewAttendanceController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         //lecture
-        String lectureID = request.getParameter("lectureID");
-        Lecture lecture = new Lecture();
-        lecture.setLectureID(lectureID);
+//        String lectureID = request.getParameter("lectureID");
+//        Lecture lecture = new Lecture();
+//        lecture.setLectureID(lectureID);
+        Lecture lecture = (Lecture)request.getSession().getAttribute("lecture");       
         LectureDBContext dbLecture = new LectureDBContext();
-        lecture = dbLecture.getLectureByID(lecture);
+        lecture = dbLecture.getLectureByUsername(lecture);
         request.setAttribute("lecture", lecture);
         //groups belong to lecture
         GroupDBContext dbGroup = new GroupDBContext();
         ArrayList<Group> groups = dbGroup.list(lecture);
         request.setAttribute("groups", groups);
 
-        request.getRequestDispatcher("view/search/viewattendance.jsp").forward(request, response);
+        request.getRequestDispatcher("view/mains/viewattendance.jsp").forward(request, response);
 
     }
 
@@ -130,7 +131,7 @@ public class ViewAttendanceController extends HttpServlet {
         HashMap<Student, Integer> absents = dbAttendance.totalAbsent(group);
         request.setAttribute("absents", absents);
 
-        request.getRequestDispatcher("view/search/viewattendance.jsp").forward(request, response);
+        request.getRequestDispatcher("view/mains/viewattendance.jsp").forward(request, response);
 
     }
 
