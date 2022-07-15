@@ -11,21 +11,24 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <header style="font-weight: bold;font-family: cursive;text-align: center;font-size: 40px;background-color: #fa9600;width: 100%;length: 100px">
+    <body style="background-color: #81F7D2">
+        <header style="font-weight: bold;font-family: cursive;text-align: center;font-size: 50px;background-color: #EDB442;padding: 60px">
             FPT University Academic Portal 
         </header>   
-        <div style="font-weight: bold;font-family: cursive;font-size: 25px">
-            Hello  lecture ${lecture.lectureName}
+        <div style="background-color: white;text-align: center;margin-top: 20px">
+            <div style="font-weight: bold;font-family: cursive;font-size: 25px">
+                Hello  lecture ${lecture.lectureName}
+            </div>
+            <a href="timetable" style="font-weight: bold;font-family: cursive;font-size: 20px">
+                View Timetable
+            </a> <br>
+            <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-weight: bold;font-family: cursive;font-size: 20px"">
+                View Attendance
+            </a> <br>
+            <a href="authentication" style="font-weight: bold;font-family: cursive;font-size: 20px">
+                Logout
+            </a> <br>            
         </div>
-        <a href="timetable" style="font-weight: bold;font-family: cursive;font-size: 20px">
-            View Timetable
-        </a> <br>
-        <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-weight: bold;font-family: cursive;font-size: 20px"">
-            View Attendance
-        </a> <br>
-        <a href="authentication" style="font-weight: bold;font-family: cursive;font-size: 20px">
-            Logout
-        </a> <br>
+
     </body>
 </html>

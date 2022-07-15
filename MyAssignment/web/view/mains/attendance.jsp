@@ -13,12 +13,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
+    <body style="background-color: #81F7D2">
         <form action="attendance" method="POST" style="text-align: center;font-family: cursive"> 
             <input type="hidden" value="${session.sessionID}" name="sessionID" />
-            <a href="timetable"> Home </a>
-            <a href="authentication" style="font-family: cursive">Logout</a><Br>
-            <table border="2" style="width: 100%">
+            <div style="padding: 5px;color: black">
+                <a href="timetable"> Timetable </a>
+                <a href="authentication" style="font-family: cursive">Logout</a><Br>                
+            </div>
+            <table border="2" style="width: 100%;background-color: white">
                 <tr style="background-color: #fa9600">
                     <td>
                         Student ID
@@ -77,7 +79,7 @@
                     </tr>
                 </c:forEach>
             </table> </br>
-            <input type="submit" value="Save" style="text-align: center;padding: 10px 20px;font-size: 20px;background-color: #00dbdb;border-radius: 10%"/>
+            <input type="submit" value="Save" style="text-align: center;padding: 10px 20px;font-size: 20px;background-color: #fa9600;border-radius: 10%"/>
         </form>
     </body>
 </html>
