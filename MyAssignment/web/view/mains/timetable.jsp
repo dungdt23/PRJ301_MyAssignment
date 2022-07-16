@@ -30,7 +30,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <tr style="background-color: #00dbdb">
                     <td style="background-color: #00dbdb">
                         Calendar <br/>
-                        <input id="date" type="date" name="date""/>
+                        <input id="date" type="date" name="date" value="${dateStr}"/>
                     </td >
                     <c:forEach var="w" items="${requestScope.weekdays1}">
                         <td style="background-color: #00dbdb">${w}</td> 

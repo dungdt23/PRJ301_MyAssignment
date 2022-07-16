@@ -53,16 +53,22 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DataDBContext dbData = new DataDBContext();
-        ArrayList<String> campuses = dbData.campus();
-        //LectureDBContext dbLecture = new LectureDBContext();
-        //ArrayList<Lecture> lectures = dbLecture.list();
-        request.setAttribute("campus", campuses);
-        String campus = request.getParameter("campus");
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        request.getRequestDispatcher("view/authentication/login.jsp").forward(request, response);
+        Lecture lecture = (Lecture) request.getSession().getAttribute("lecture");
+        if (lecture != null) {
+            request.getRequestDispatcher("view/authentication/login_confirm.jsp").forward(request, response);
+        } else {
+            DataDBContext dbData = new DataDBContext();
+            ArrayList<String> campuses = dbData.campus();
+            //LectureDBContext dbLecture = new LectureDBContext();
+            //ArrayList<Lecture> lectures = dbLecture.list();
+            request.setAttribute("campus", campuses);
+            String campus = request.getParameter("campus");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+
+            request.getRequestDispatcher("view/authentication/login.jsp").forward(request, response);
+        }
+
     }
 
     /**
@@ -117,9 +123,9 @@ public class AuthenticationController extends HttpServlet {
 //            request.setAttribute("sessions", sessions);
 //
 //            request.getRequestDispatcher("view/search/timetable.jsp").forward(request, response);
-              //response.getWriter().println("Hello" + lecture.getLectureName());  
-              request.setAttribute("lecture", lecture);
-              request.getRequestDispatcher("view/authentication/login_confirm.jsp").forward(request, response);
+            //response.getWriter().println("Hello" + lecture.getLectureName());  
+            request.setAttribute("lecture", lecture);
+            request.getRequestDispatcher("view/authentication/login_confirm.jsp").forward(request, response);
         } else {
             response.getWriter().println("failed");
         }

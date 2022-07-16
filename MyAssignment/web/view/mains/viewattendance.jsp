@@ -21,9 +21,9 @@
             </div><br>
             Lecture <input type="text" name="username" value="${lecture.username}" style="font-family: cursive;width: 8%"  readonly/>
             -Group <select name="group">
-                    <option style="font-family: cursive">----</option>
+                <option style="font-family: cursive">----</option>
                 <c:forEach var="g" items="${requestScope.groups}">
-                    <option style="font-family: cursive">${g.groupID}</option>
+                    <option ${choosenGroupID eq g.groupID ? "selected" : ""} style="font-family: cursive">${g.groupID}</option>
                 </c:forEach>
             </select>   
             <input type="hidden" name="lectureID" value="${lecture.lectureID}" style="font-family: cursive"/>            

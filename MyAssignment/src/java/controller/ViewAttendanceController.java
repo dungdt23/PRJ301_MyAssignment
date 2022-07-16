@@ -82,7 +82,7 @@ public class ViewAttendanceController extends HttpServlet {
         GroupDBContext dbGroup = new GroupDBContext();
         ArrayList<Group> groups = dbGroup.list(lecture);
         request.setAttribute("groups", groups);
-
+        
         request.getRequestDispatcher("view/mains/viewattendance.jsp").forward(request, response);
 
     }
@@ -117,6 +117,7 @@ public class ViewAttendanceController extends HttpServlet {
         group.setGroupID(choosenGroupID);
         StudentDBContext dbStudent = new StudentDBContext();
         ArrayList<Student> students = dbStudent.list(group);
+        request.setAttribute("choosenGroupID", choosenGroupID);
         request.setAttribute("students", students);
 
         SessionDBContext dbSession = new SessionDBContext();

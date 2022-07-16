@@ -195,7 +195,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
             Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (!checkExist) {
-            attendances=null;
+            attendances = null;
         }
         return attendances;
     }

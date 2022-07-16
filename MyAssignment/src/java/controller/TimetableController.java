@@ -74,6 +74,11 @@ public class TimetableController extends BaseRequiredAuthenticationController {
         request.setAttribute("lecture", lecture);
         DateHandle dbDate = new DateHandle();
         Date currentDate = new Date();
+        try {
+            String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
+            request.setAttribute("dateStr", dateStr);
+        } catch (Exception e) {
+        }
         ArrayList<Date> week = dbDate.getWeek(currentDate);
         ArrayList<String> weekdays = new ArrayList<>();
         for (Date date0 : week) {
@@ -129,6 +134,7 @@ public class TimetableController extends BaseRequiredAuthenticationController {
         request.setAttribute("lecture", lecture);
         //get date 
         String dateStr = request.getParameter("date");
+        request.setAttribute("dateStr", dateStr);
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);

@@ -13,7 +13,7 @@
         <title>Login</title>
     </head>
     <body style="background-color: #81F7D2">
-        <header>
+        <header style="text-align: center">
             <img src="img/img1.png" alt=""/>
         </header>
         <form action="authentication" method="POST">
