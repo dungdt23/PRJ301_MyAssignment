@@ -19,6 +19,9 @@ import model.Subject;
  * @author Admin
  */
 public class GroupDBContext extends DBContext<Group> {
+    public static void main(String[] args) {
+         
+    }
 
     @Override
     public ArrayList<Group> list() {

@@ -18,7 +18,7 @@
             <input type="hidden" value="${session.sessionID}" name="sessionID" />
             <div style="padding: 5px;color: black">
                 <a href="timetable"> Timetable </a>
-                <a href="authentication" style="font-family: cursive">Logout</a><Br>                
+                <a href="logout" style="font-family: cursive">Logout</a><Br>                
             </div>
             <table border="2" style="width: 100%;background-color: white">
                 <tr style="background-color: #fa9600">

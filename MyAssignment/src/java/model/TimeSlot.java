@@ -10,13 +10,13 @@ package model;
  */
 public class TimeSlot {
     private String slotID;
-    private int startSlot;
-    private int endSlot;
+    private String startSlot;
+    private String endSlot;
 
     public TimeSlot() {
     }
 
-    public TimeSlot(String slotID, int startSlot, int endSlot) {
+    public TimeSlot(String slotID, String startSlot, String endSlot) {
         this.slotID = slotID;
         this.startSlot = startSlot;
         this.endSlot = endSlot;
@@ -26,11 +26,11 @@ public class TimeSlot {
         return slotID;
     }
 
-    public int getStartSlot() {
+    public String getStartSlot() {
         return startSlot;
     }
 
-    public int getEndSlot() {
+    public String getEndSlot() {
         return endSlot;
     }
 
@@ -38,11 +38,11 @@ public class TimeSlot {
         this.slotID = slotID;
     }
 
-    public void setStartSlot(int startSlot) {
+    public void setStartSlot(String startSlot) {
         this.startSlot = startSlot;
     }
 
-    public void setEndSlot(int endSlot) {
+    public void setEndSlot(String endSlot) {
         this.endSlot = endSlot;
     }
     

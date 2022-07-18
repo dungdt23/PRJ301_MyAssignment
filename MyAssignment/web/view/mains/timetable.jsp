@@ -23,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             -->     
             <div style="background-color: #fa9600;padding: 5px;color: black">
                 <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-family: cursive">View Attendance</a>
-                <a href="authentication" style="font-family: cursive">Logout</a><Br>                  
+                <a href="logout" style="font-family: cursive">Logout</a><Br>                  
             </div>
 
             <table border="2" style="width: 100%"> 

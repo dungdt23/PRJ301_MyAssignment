@@ -75,8 +75,8 @@ public class ViewAttendanceController extends HttpServlet {
 //        Lecture lecture = new Lecture();
 //        lecture.setLectureID(lectureID);
         Lecture lecture = (Lecture)request.getSession().getAttribute("lecture");       
-        LectureDBContext dbLecture = new LectureDBContext();
-        lecture = dbLecture.getLectureByUsername(lecture);
+//        LectureDBContext dbLecture = new LectureDBContext();
+//        lecture = dbLecture.getLectureByUsername(lecture);
         request.setAttribute("lecture", lecture);
         //groups belong to lecture
         GroupDBContext dbGroup = new GroupDBContext();
@@ -101,12 +101,13 @@ public class ViewAttendanceController extends HttpServlet {
         //processRequest(request, response);
 
         //lecture
-        String lectureID = request.getParameter("lectureID");
-        Lecture lecture = new Lecture();
-        lecture.setLectureID(lectureID);
-        LectureDBContext dbLecture = new LectureDBContext();
-        lecture = dbLecture.getLectureByID(lecture);
-        request.setAttribute("lecture", lecture);
+        Lecture lecture = (Lecture)request.getSession().getAttribute("lecture");
+//        String lectureID = request.getParameter("lectureID");
+//        Lecture lecture = new Lecture();
+//        lecture.setLectureID(lectureID);
+//        LectureDBContext dbLecture = new LectureDBContext();
+//        lecture = dbLecture.getLectureByID(lecture);
+         request.setAttribute("lecture", lecture);
         //groups belong to lecture
         GroupDBContext dbGroup = new GroupDBContext();
         ArrayList<Group> groups = dbGroup.list(lecture);

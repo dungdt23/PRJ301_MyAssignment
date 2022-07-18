@@ -131,6 +131,7 @@ public class AttendanceController extends HttpServlet {
         }
 
         dbSession.updateAttendace(session);
+        response.sendRedirect("timetable");
 
     }
 

@@ -72,14 +72,14 @@ public class TimetableController extends BaseRequiredAuthenticationController {
 //        String lectureName = lecture.getLectureName();
 //        String campus = lecture.getCampus();
         request.setAttribute("lecture", lecture);
-        DateHandle dbDate = new DateHandle();
+        DateHandle dh = new DateHandle();
         Date currentDate = new Date();
         try {
             String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
             request.setAttribute("dateStr", dateStr);
         } catch (Exception e) {
         }
-        ArrayList<Date> week = dbDate.getWeek(currentDate);
+        ArrayList<Date> week = dh.getWeek(currentDate);
         ArrayList<String> weekdays = new ArrayList<>();
         for (Date date0 : week) {
             SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd");
@@ -121,13 +121,14 @@ public class TimetableController extends BaseRequiredAuthenticationController {
         //processRequest(request, response);
 
         //set information for lecture
-        String lectureUsername = request.getParameter("username");
-        String lectureName = request.getParameter("lectureName");
-        String lectureCampus = request.getParameter("campus");
-        LectureDBContext dbLecture = new LectureDBContext();
-        Lecture lecture = new Lecture();
-        lecture.setUsername(lectureUsername);
-        lecture = dbLecture.getLectureByUsername(lecture);
+        Lecture lecture = (Lecture) request.getSession().getAttribute("lecture");
+//        String lectureUsername = request.getParameter("username");
+//        String lectureName = request.getParameter("lectureName");
+//        String lectureCampus = request.getParameter("campus");
+//        LectureDBContext dbLecture = new LectureDBContext();
+//        Lecture lecture = new Lecture();
+//        lecture.setUsername(lectureUsername);
+//        lecture = dbLecture.getLectureByUsername(lecture);
 //        lecture.setLectureID(lectureID);
 //        lecture.setCampus(lectureCampus);
 //        lecture.setLectureName(lectureName);

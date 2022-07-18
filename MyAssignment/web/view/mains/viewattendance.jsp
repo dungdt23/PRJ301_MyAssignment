@@ -29,7 +29,7 @@
             <input type="hidden" name="lectureID" value="${lecture.lectureID}" style="font-family: cursive"/>            
             <input type="submit" value="View" style="font-family: cursive"/> <br> 
             <a href="timetable"> Home </a>
-            <a href="authentication" style="font-family: cursive">Logout</a><Br> 
+            <a href="logout" style="font-family: cursive">Logout</a><Br> 
             <c:if test="${requestScope.students ne null}">
                 <table border="2" style="width: 100%;background-color: white">
                     <tr style="background-color: #fa9600">
