@@ -11,34 +11,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Timetable</title>
     </head>
     <body>
-        <form id="dungdt" action="timetable" method="POST" style="font-family: cursive;text-align: center">
+        <form id="dungdt" action="timetable" method="POST" >
             Campus: <select name="campus">
-                <option style="font-family: cursive">${lecture.campus}</option>
+                <option >${lecture.campus}</option>
             </select> <Br/>
             <input name="lectureName"value="${lecture.lectureName}" type="hidden"/>
-            Lecture: <input type="text" name="username" value="${lecture.username}" style="font-family: cursive"  readonly/>
-            <input type="submit" value="View" style="font-family: cursive"/> </br>
-            <div style="font-weight: bold;font-size: 20px">Activities for ${lecture.username} (${lecture.lectureName})</div>         
+            Lecture: <input type="text" name="username" value="${lecture.username}" readonly/>
+            <input type="submit" value="View" /> </br>
+            <div >Activities for ${lecture.username} (${lecture.lectureName})</div>         
             <!--                <input type="submit" value="View Attendance" style="font-family: cursive;background-color: #fa9600;margin-left: -1000px "/> <br>  
             -->     
-            <div style="background-color: #fa9600;padding: 5px;color: black">
-                <a href="viewattendance?lectureID=${lecture.lectureID}" style="font-family: cursive">View Attendance</a>
-                <a href="logout" style="font-family: cursive">Logout</a><Br>                  
+            <div >
+                <a href="viewattendance?lectureID=${lecture.lectureID}" >View Attendance</a>
+                <a href="logout" >Logout</a><Br>                  
             </div>
 
-            <table border="2" style="width: 100%"> 
-                <tr style="background-color: #00dbdb">
-                    <td style="background-color: #00dbdb">
+            <table border="2" > 
+                <tr>
+                    <td >
                         Calendar <br/>
                         <input id="date" type="date" name="date" value="${dateStr}"/>
                     </td >
                     <c:forEach var="w" items="${requestScope.weekdays1}">
-                        <td style="background-color: #00dbdb">${w}</td> 
+                        <td >${w}</td> 
                     </c:forEach>
                 </tr>  
                 <c:forEach var="s" items="${requestScope.slots}">
                     <tr>
-                        <td style="background-color: #fa9600">
+                        <td >
                             ${s.slotID} <br/>
                             ${s.startSlot} - ${s.endSlot} 
                         </td>

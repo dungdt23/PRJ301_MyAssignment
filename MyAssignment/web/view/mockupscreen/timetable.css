@@ -1,5 +1,6 @@
 body {
     background-image: url("../../img/bg2.png");
+    font-family: cursive;
 }
 
 :root {
@@ -22,6 +23,7 @@ input {
 }
 
 input[type=submit] {
+    font-family: cursive;
     position: relative;
     outline: none;
     border: none;
@@ -46,11 +48,15 @@ input[type=submit]:hover {
 
 table {
     margin-top: 20px;
-    font-size: 20px;
-    background-color: rgb(248, 195, 60);
-    box-shadow: 1px 1px 5px black;
-    border-radius: 15px;
+    background-color: rgb(250, 249, 247);
+    box-shadow: 1px 1px 10px black;    
     width: 100%;
+    border: none;
+    border-radius: 15px;
+}
+table tr:first-child td {
+    background-color: rgb(248, 195, 60);
+    font-weight: bold;
 }
 
 a {

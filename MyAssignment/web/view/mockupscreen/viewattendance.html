@@ -4,180 +4,187 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
 <html>
-    <head>
-        <title>View Attendance</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <form action="viewattendance" method="POST" style="text-align: center;font-family: cursive">  
-            Lecture <input type="text" name="lecture" value="lectureUsername" style="font-family: cursive;width: 8%"  readonly/>
-            -Group <select name="group">
-                <option style="font-family: cursive">SE1625</option>
-                <option style="font-family: cursive">SE1631</option>
-                <option style="font-family: cursive">SE1634</option>
-            </select> 
-<!--            - Subject <select name="subject">
-                <option style="font-family: cursive">MAS291</option>
-                <option style="font-family: cursive">PRJ301</option>
-                <option style="font-family: cursive">LAB211</option>
-            </select>  -->
-            <input type="submit" value="View" style="font-family: cursive"/> <br> 
-            <div style="font-weight: bold; font-size: 20px">Attendance for lecture LectureName - PRJ301 - SE1631 - Slot 1 - DE201C</div>
-            <table border="2" style="width: 100%">
-                <tr style="background-color: #fa9600">
-                    <td>
-                        Session 
-                    </td>
-                    <td>
-                        HE1600001 <br>
-                        Student Name
-                    </td>
-                    <td>
-                        HE1600002 <br>
-                        Student Name
-                    </td>
-                    <td>
-                        HE1600003 <br>
-                        Student Name
-                    </td>
-                    <td>
-                        HE1600004 <br>
-                        Student Name
-                    </td>
-                    <td>
-                        HE1600005 <br>
-                        Student Name
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        No.1 <br>
-                        01/06/2022
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td >
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        No.2 <br>
-                        03/06/2022
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: red">
-                        Absent
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td >
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                    <td style="color: red">
-                        Absent 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        No.3 <br>
-                        05/06/2022
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td >
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        No.4 <br>
-                        07/06/2022
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td >
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        No.5 <br>
-                        09/06/2022
-                    </td>
-                    <td style="color: #05F700">
-                        Present
-                    </td>
-                    <td style="color: red">
-                        Absent 
-                    </td>
-                    <td style="color: red">
-                        Absent 
-                    </td>
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                    <td style="color: #05F700">
-                        Present 
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Absent so far <br>
-                        Total 5 
-                    </td>
-                    <td>
-                        0%
-                    </td>
-                    <td>
-                        40%
-                    </td> 
-                    <td>
-                        20%
-                    </td>
-                    <td>
-                        0%
-                    </td>
-                    <td>
-                        20%
-                    </td>                    
-                </tr>
 
-            </table> </br>
-        </form>
-    </body>
+<head>
+    <title>View Attendance</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="viewattendance.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <form action="viewattendance" method="POST">
+        <div class="LectureInfo">
+            Lecture <input class="input" type="text" name="lecture" value="lectureUsername" eadonly />
+            -Group <select class="input" name="group">
+                <option>SE1625</option>
+                <option>SE1631</option>
+                <option>SE1634</option>
+            </select>
+            <!--            - Subject <select name="subject">
+                    <option style="font-family: cursive">MAS291</option>
+                    <option style="font-family: cursive">PRJ301</option>
+                    <option style="font-family: cursive">LAB211</option>
+                </select>  -->
+            <input type="submit" value="View" /> <br>
+            <div>Attendance for lecture LectureName - PRJ301 - SE1631 - Slot 1 - DE201C</div>
+        </div>
+
+        <table border="2">
+            <tr>
+                <td>
+                    Session
+                </td>
+                <td>
+                    HE1600001 <br>
+                    Student Name
+                </td>
+                <td>
+                    HE1600002 <br>
+                    Student Name
+                </td>
+                <td>
+                    HE1600003 <br>
+                    Student Name
+                </td>
+                <td>
+                    HE1600004 <br>
+                    Student Name
+                </td>
+                <td>
+                    HE1600005 <br>
+                    Student Name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No.1 <br>
+                    01/06/2022
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No.2 <br>
+                    03/06/2022
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: red">
+                    Absent
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: red">
+                    Absent
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No.3 <br>
+                    05/06/2022
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No.4 <br>
+                    07/06/2022
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    No.5 <br>
+                    09/06/2022
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: red">
+                    Absent
+                </td>
+                <td style="color: red">
+                    Absent
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+                <td style="color: #05F700">
+                    Present
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Absent so far <br>
+                    Total 5
+                </td>
+                <td>
+                    0%
+                </td>
+                <td>
+                    40%
+                </td>
+                <td>
+                    20%
+                </td>
+                <td>
+                    0%
+                </td>
+                <td>
+                    20%
+                </td>
+            </tr>
+
+        </table> </br>
+    </form>
+</body>
+
 </html>
